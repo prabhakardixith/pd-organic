@@ -46,7 +46,7 @@ public class PdOrganicApplication implements CommandLineRunner{
 	}
 
 	@DeleteMapping("/user")
-	public void deleteUser(@RequestBody int id){
+	public void deleteUser(@RequestParam int id){
 		userList = userList.stream().filter(f -> f.userId != id).collect(Collectors.toSet());
 	}
 
