@@ -31,7 +31,8 @@ public class PdOrganicApplication implements CommandLineRunner{
 
 	@PostMapping("/user")
 	public User addUser(@RequestBody User user){
-		user.setUserId(count+1);
+		count = userList.size();
+		user.setUserId(++count);
 		userList.add(user);
 //		System.out.println(user);
 		return user;
