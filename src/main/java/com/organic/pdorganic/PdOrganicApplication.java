@@ -1,21 +1,23 @@
 package com.organic.pdorganic;
 
+import com.organic.pdorganic.repo.UserRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @SpringBootApplication
 @RestController
 @CrossOrigin(origins = {"https://pd-organic-react.herokuapp.com/","http://localhost:3000"})
-public class PdOrganicApplication implements CommandLineRunner{
-	Set<User> userList ;
-
-	int count ;
+public class PdOrganicApplication{
+	@Autowired
+	UserRepo userRepo ;
 	public static void main(String[] args) {
 		SpringApplication.run(PdOrganicApplication.class, args);
 	}
@@ -24,43 +26,27 @@ public class PdOrganicApplication implements CommandLineRunner{
 
 	}
 	@GetMapping("/user")
-	public Set<User> getAllUsers(){
+	public List<User> getAllUsers(){
 //		System.out.println("get User");
-		return userList;
+		return userRepo.findAll();
 	}
 
 	@PostMapping("/user")
 	public User addUser(@RequestBody User user){
-		if(userList.size() > count) {
-			count = userList.size();
-		}
-		user.setUserId(++count);
-		userList.add(user);
+		User savedUser = userRepo.save(user);
 //		System.out.println(user);
-		return user;
+		return savedUser;
 	}
 
 	@PutMapping("/user")
 	public User updateUser(@RequestBody User user){
-		userList = userList.stream().filter(f-> f.userId != user.userId).collect(Collectors.toSet());
-		userList.add(user);
-		return user;
+		User updateUser = userRepo.saveAndFlush(user);
+		return updateUser;
 	}
 
 	@DeleteMapping("/user")
 	public void deleteUser(@RequestParam("id") int id){
-		userList = userList.stream().filter(f -> f.userId != id).collect(Collectors.toSet());
+		userRepo.deleteById(id);
 	}
 
-	@Override
-	public void run(String... args) throws Exception {
-		userList = new LinkedHashSet<>();
-//		userList.add(new User(1,"prabhakar dixit","pd@gmail.com"));
-//		userList.add(new User(2,"praveen dixit","dd@gmail.com"));
-//		userList.add(new User(3,"nalu dixit","nd@gmail.com"));
-//		userList.add(new User(4,"asha dixit","ad@gmail.com"));
-//		userList.add(new User(5,"anu patil","ap@gmail.com"));
-
-		count = userList.size();
-	}
 }
