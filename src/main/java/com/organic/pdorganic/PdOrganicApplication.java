@@ -55,11 +55,11 @@ public class PdOrganicApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		userList = new LinkedHashSet<>();
-		userList.add(new User(1,"prabhakar dixit","pd@gmail.com"));
-		userList.add(new User(2,"diwakar dixit","dd@gmail.com"));
-		userList.add(new User(3,"nalu dixit","nd@gmail.com"));
-		userList.add(new User(4,"asha dixit","ad@gmail.com"));
-		userList.add(new User(5,"anu patil","ap@gmail.com"));
+//		userList.add(new User(1,"prabhakar dixit","pd@gmail.com"));
+//		userList.add(new User(2,"praveen dixit","dd@gmail.com"));
+//		userList.add(new User(3,"nalu dixit","nd@gmail.com"));
+//		userList.add(new User(4,"asha dixit","ad@gmail.com"));
+//		userList.add(new User(5,"anu patil","ap@gmail.com"));
 
 		count = userList.size();
 	}
