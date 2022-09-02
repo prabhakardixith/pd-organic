@@ -39,6 +39,7 @@ public class PdOrganicApplication implements CommandLineRunner{
 
 	@PutMapping("/user")
 	public User updateUser(@RequestBody User user){
+		userList = userList.stream().filter(f-> f.userId != user.userId).collect(Collectors.toSet());
 		userList.add(user);
 		return user;
 	}
