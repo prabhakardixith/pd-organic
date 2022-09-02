@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @SpringBootApplication
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://pd-organic.herokuapp.com/user")
 public class PdOrganicApplication implements CommandLineRunner{
 	Set<User> userList ;
 
