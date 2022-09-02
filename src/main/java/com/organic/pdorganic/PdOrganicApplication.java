@@ -55,6 +55,8 @@ public class PdOrganicApplication implements CommandLineRunner{
 		userList.add(new User(2,"diwakar dixit","dd@gmail.com"));
 		userList.add(new User(3,"nalu dixit","nd@gmail.com"));
 		userList.add(new User(4,"asha dixit","ad@gmail.com"));
+		userList.add(new User(4,"anu patil","ap@gmail.com"));
+
 		count = userList.size();
 	}
 }
