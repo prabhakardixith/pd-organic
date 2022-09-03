@@ -1,4 +1,4 @@
-package com.organic.pdorganic;
+package com.organic.pdorganic.entity;
 
 import lombok.Data;
 import lombok.Getter;
