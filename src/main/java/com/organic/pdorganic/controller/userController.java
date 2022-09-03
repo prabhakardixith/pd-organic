@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = {"https://pd-organic-react.herokuapp.com/","http://localhost:3000"})
 public class userController
 {
     @Autowired
