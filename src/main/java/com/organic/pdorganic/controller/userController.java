@@ -24,13 +24,13 @@ public class userController
 
     @GetMapping("/user")
     public List<User> getAllUsers(){
-//		System.out.println("get User");
+        template.convertAndSend(MqConfig.EXCHANGE,MqConfig.Routing_Key,new UserOperationalStatus(0,UUID.randomUUID().toString(),"","Requested for all users",new Date()));
         return userService.getAllUsers();
     }
 
     @GetMapping("/userById")
     public User getUserById(@RequestParam("id") int id){
-//		System.out.println("get User");
+        template.convertAndSend(MqConfig.EXCHANGE,MqConfig.Routing_Key,new UserOperationalStatus(0,UUID.randomUUID().toString(),""+id,"Requested for specific user by Id",new Date()));
         return userService.getUserById(id);
     }
 
