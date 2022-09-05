@@ -1,4 +1,11 @@
 spring:
+  rabbitmq:
+    host: puffin.rmq2.cloudamqp.com
+    port: 5672
+    username: jimdppcw
+    password: Iphj78xtvO-qxvMo5s1tqjt1rD4VwdSW
+    virtual-host: jimdppcw
+
   dataSource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: sql6516875
