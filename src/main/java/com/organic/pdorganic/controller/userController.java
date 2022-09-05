@@ -1,13 +1,11 @@
 package com.organic.pdorganic.controller;
 
 import com.organic.pdorganic.entity.User;
-import com.organic.pdorganic.rabbitmq_producer.CustomMessage;
+import com.organic.pdorganic.entity.UserOperationalStatus;
 import com.organic.pdorganic.rabbitmq_producer.MqConfig;
 import com.organic.pdorganic.service.UserService;
-import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -39,21 +37,21 @@ public class userController
     @PostMapping("/user")
     public User addUser(@RequestBody User user){
         User savedUser = userService.saveOrUpdate(user);
-        template.convertAndSend(MqConfig.EXCHANGE,MqConfig.Routing_Key,new CustomMessage(UUID.randomUUID().toString(),user.getEmailId(),"new User created",new Date()));
+        template.convertAndSend(MqConfig.EXCHANGE,MqConfig.Routing_Key,new UserOperationalStatus(0,UUID.randomUUID().toString(),user.getEmailId(),"new User created",new Date()));
         return savedUser;
     }
 
     @PutMapping("/user")
     public User updateUser(@RequestBody User user){
         User updateUser = userService.saveOrUpdate(user);
-        template.convertAndSend(MqConfig.EXCHANGE,MqConfig.Routing_Key,new CustomMessage(UUID.randomUUID().toString(),""+user.getUserId(),"User Updated",new Date()));
+        template.convertAndSend(MqConfig.EXCHANGE,MqConfig.Routing_Key,new UserOperationalStatus(0,UUID.randomUUID().toString(),""+user.getUserId(),"User Updated",new Date()));
         return updateUser;
     }
 
     @DeleteMapping("/user")
     public void deleteUser(@RequestParam("id") int id){
 //        System.out.println("deleteUser by id : "+id);
-        template.convertAndSend(MqConfig.EXCHANGE,MqConfig.Routing_Key,new CustomMessage(UUID.randomUUID().toString(),""+id,"User Deleted",new Date()));
+        template.convertAndSend(MqConfig.EXCHANGE,MqConfig.Routing_Key,new UserOperationalStatus(0,UUID.randomUUID().toString(),""+id,"User Deleted",new Date()));
         userService.deleteUserById(id);
     }
 
