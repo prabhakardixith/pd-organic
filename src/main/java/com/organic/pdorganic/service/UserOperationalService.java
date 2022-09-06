@@ -8,6 +8,8 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Component
 public class UserOperationalService
@@ -22,6 +24,16 @@ public class UserOperationalService
 
 //    @CacheEvict(value = "userOperationalStatus",allEntries = true)
     public void addOperationalStatus(UserOperationalStatus userOperationalStatus) {
-        userOperationalStatusRepo.saveAndFlush(userOperationalStatus);
+        long count = userOperationalStatusRepo.findAll().stream().count();
+        if(count >= 10){
+            List<UserOperationalStatus> collect = userOperationalStatusRepo.getRecentTenStatusRecords().stream().limit(9).collect(Collectors.toList());
+            collect.add(userOperationalStatus);
+            List<UserOperationalStatus> remove = userOperationalStatusRepo.findAll();
+            userOperationalStatusRepo.deleteAll(remove);
+            userOperationalStatusRepo.saveAll(collect);
+        }
+        else{
+            userOperationalStatusRepo.saveAndFlush(userOperationalStatus);
+        }
     }
 }
