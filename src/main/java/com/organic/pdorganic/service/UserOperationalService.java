@@ -28,6 +28,8 @@ public class UserOperationalService
         if(count >= 10){
             List<UserOperationalStatus> collect = userOperationalStatusRepo.getRecentTenStatusRecords().stream().limit(9).collect(Collectors.toList());
             collect.add(userOperationalStatus);
+            List<UserOperationalStatus> remove = userOperationalStatusRepo.findAll();
+            userOperationalStatusRepo.deleteAll(remove);
             userOperationalStatusRepo.saveAll(collect);
         }
         else{
