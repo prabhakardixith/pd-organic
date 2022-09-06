@@ -3,24 +3,29 @@ package com.organic.pdorganic.controller;
 import com.organic.pdorganic.entity.UserOperationalStatus;
 import com.organic.pdorganic.rabbitmq_producer.MqConfig;
 import com.organic.pdorganic.repo.UserOperationalStatusRepo;
+import com.organic.pdorganic.service.UserOperationalService;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpRequest;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin
 public class UserOperationalStatusControl {
     @Autowired
-    UserOperationalStatusRepo userOperationalStatusRepo ;
+    UserOperationalService  userOperationalService;
 
     @Autowired
     RabbitTemplate template;
 
     @GetMapping("/user/operational")
+
     public List<UserOperationalStatus> allUSerOperationalStatus() {
-        return userOperationalStatusRepo.findAll();
+        return userOperationalService.getUserOperationalStatusRepo();
     }
 }
