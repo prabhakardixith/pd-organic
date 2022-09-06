@@ -28,7 +28,7 @@ public class UserService
 
     @Cacheable(value = "user")
     public List<User> getAllUsers(){
-        template.convertAndSend(MqConfig.EXCHANGE,MqConfig.Routing_Key,new UserOperationalStatus(0, UUID.randomUUID().toString(),"","Requested for all users",new Date()));
+//        template.convertAndSend(MqConfig.EXCHANGE,MqConfig.Routing_Key,new UserOperationalStatus(0, UUID.randomUUID().toString(),"","Requested for all users",new Date()));
         return userRepo.findAll();
     }
 
