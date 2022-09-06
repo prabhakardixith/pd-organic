@@ -7,6 +7,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -26,7 +27,7 @@ public class UserOperationalService
     public void addOperationalStatus(UserOperationalStatus userOperationalStatus) {
         long count = userOperationalStatusRepo.findAll().stream().count();
         if(count >= 10){
-            List<UserOperationalStatus> collect = userOperationalStatusRepo.getRecentTenStatusRecords().stream().limit(9).collect(Collectors.toList());
+            List<UserOperationalStatus> collect = (LinkedList<UserOperationalStatus>)userOperationalStatusRepo.getRecentTenStatusRecords().stream().limit(9).collect(Collectors.toList());
             collect.add(userOperationalStatus);
             List<UserOperationalStatus> remove = userOperationalStatusRepo.findAll();
             userOperationalStatusRepo.deleteAll(remove);
