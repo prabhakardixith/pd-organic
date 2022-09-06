@@ -17,7 +17,7 @@ public class UserOperationalService
 
 //    @Cacheable(value = "userOperationalStatus")
     public List<UserOperationalStatus> getUserOperationalStatusRepo() {
-       return userOperationalStatusRepo.findAll();
+       return userOperationalStatusRepo.getRecentTenStatusRecords();
     }
 
 //    @CacheEvict(value = "userOperationalStatus",allEntries = true)
