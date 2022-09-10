@@ -1,7 +1,7 @@
 package com.organic.pdorganic;
 
-import com.organic.pdorganic.repo.UserRepo;
-import com.organic.pdorganic.service.UserService;
+//import com.organic.pdorganic.repo.UserRepo;
+//import com.organic.pdorganic.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

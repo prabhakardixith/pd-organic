@@ -27,23 +27,23 @@ public class UserService
     RabbitTemplate template;
 
     @Cacheable(value = "user")
-    public List<User> getAllUsers(){
+    public List<User> getAllUsers()throws Exception{
 //        template.convertAndSend(MqConfig.EXCHANGE,MqConfig.Routing_Key,new UserOperationalStatus(0, UUID.randomUUID().toString(),"","Requested for all users",new Date()));
         return userRepo.findAll();
     }
 
 //    @Cacheable(cacheNames = "user",key = "#user.userId")
-    public User getUserById(int id){
+    public User getUserById(int id)throws Exception{
         return userRepo.findById(id).get();
     }
 
     @CacheEvict(value = "user",allEntries = true)
-    public User saveOrUpdate(User user) {
+    public User saveOrUpdate(User user) throws Exception{
         return userRepo.saveAndFlush(user);
     }
 
     @CacheEvict(value = "user",allEntries = true)
-    public void deleteUserById(int id) {
+    public void deleteUserById(int id)throws Exception {
         userRepo.deleteById(id);
     }
 

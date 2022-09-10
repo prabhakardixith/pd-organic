@@ -6,6 +6,14 @@ spring:
     password: Iphj78xtvO-qxvMo5s1tqjt1rD4VwdSW
     virtual-host: jimdppcw
 
+  redis:
+    timeout: 500s
+  cache:
+    type: redis
+    redis:
+      cache-null-values: false
+      time-to-live: 60000
+
   dataSource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: sql6516875

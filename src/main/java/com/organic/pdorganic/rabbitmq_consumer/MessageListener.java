@@ -16,7 +16,7 @@ public class MessageListener {
     @Autowired
     UserOperationalService userOperationalStatusService;
     @RabbitListener(queues = MqConfig.QUEUE)
-    public void listener(UserOperationalStatus message) {
+    public void listener(UserOperationalStatus message) throws Exception{
 
         userOperationalStatusService.addOperationalStatus(message);
 

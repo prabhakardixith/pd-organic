@@ -25,7 +25,7 @@ public class UserOperationalStatusControl {
 
     @GetMapping("/user/operational")
 
-    public List<UserOperationalStatus> allUSerOperationalStatus() {
+    public List<UserOperationalStatus> allUSerOperationalStatus() throws Exception{
         return userOperationalService.getUserOperationalStatusRepo();
     }
 }
