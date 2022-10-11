@@ -14,13 +14,20 @@ spring:
       cache-null-values: false
       time-to-live: 60000
 
+  
   dataSource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: sql6516875
-    password: pMUdRKNUZN
-    url: jdbc:mysql://sql6.freemysqlhosting.net:3306/sql6516875
-
+    username: vssfedixieyobl
+    password: 87d52668b02ef63098afbbaef6ebbf03090bbbf0abf35f42439cd4a5eefce8b8
+    url: jdbc:postgresql://ec2-34-194-40-194.compute-1.amazonaws.com:5432/d75l62ha0uc0n2
+    driverClassName: org.postgresql.Driver
+    
+# spring.datasource.driver-class-name=org.postgresql.Driver
   jpa:
+    database: POSTGRESQL
+    properties:
+      hibernate:
+        formar-sql : true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
     hibernate:
       ddl-auto: update
