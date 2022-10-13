@@ -21,23 +21,13 @@ public class UserOperationalService
 
 //    @Cacheable(value = "userOperationalStatus")
     public List<UserOperationalStatus> getUserOperationalStatusRepo() throws Exception{
-       return userOperationalStatusRepo.getRecentTenStatusRecords();
+        return userOperationalStatusRepo.findByIdOrderByIdDesc();
     }
 
 //    @CacheEvict(value = "userOperationalStatus",allEntries = true)
     public void addOperationalStatus(UserOperationalStatus userOperationalStatus) throws Exception{
-        long count = userOperationalStatusRepo.findAll().stream().count();
-        if(count >= 10){
-            List<UserOperationalStatus> collect = userOperationalStatusRepo.findAll().stream().sorted(Comparator.comparingInt(UserOperationalStatus::getId)).limit(9).collect(Collectors.toList());
-            collect.add(userOperationalStatus);
-            List<UserOperationalStatus> deleted = userOperationalStatusRepo.getRecentTenStatusRecords().stream().collect(Collectors.toList());
-            userOperationalStatusRepo.deleteAll(deleted);
-            for (UserOperationalStatus userStatus : collect) {
-                userOperationalStatusRepo.save(userStatus);
-            }
-        }
-        else{
+
             userOperationalStatusRepo.saveAndFlush(userOperationalStatus);
-        }
+
     }
 }
