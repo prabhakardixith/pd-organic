@@ -21,7 +21,7 @@ public class UserOperationalService
 
 //    @Cacheable(value = "userOperationalStatus")
     public List<UserOperationalStatus> getUserOperationalStatusRepo() throws Exception{
-        return userOperationalStatusRepo.findByIdOrderByIdDesc();
+        return userOperationalStatusRepo.findTopByOrderByIdDesc();
     }
 
 //    @CacheEvict(value = "userOperationalStatus",allEntries = true)
