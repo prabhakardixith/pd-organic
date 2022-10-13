@@ -15,5 +15,5 @@ public interface UserOperationalStatusRepo extends JpaRepository<UserOperational
     ArrayList<UserOperationalStatus> getRecentTenStatusRecords();
 
 
-    List<UserOperationalStatus> findByIdOrderByIdDesc();
+    List<UserOperationalStatus> findTopByOrderByIdDesc();
 }
