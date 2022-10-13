@@ -13,4 +13,7 @@ public interface UserOperationalStatusRepo extends JpaRepository<UserOperational
 
     @Query(value = "select * from user_operational_status ORDER BY id DESC LIMIT 10;",nativeQuery = true)
     ArrayList<UserOperationalStatus> getRecentTenStatusRecords();
+
+
+    List<UserOperationalStatus> findByIdOrderByIdDesc();
 }
