@@ -5,6 +5,8 @@ import com.organic.pdorganic.repo.UserOperationalStatusRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
 import java.util.Comparator;
@@ -20,8 +22,9 @@ public class UserOperationalService
     UserOperationalStatusRepo userOperationalStatusRepo ;
 
 //    @Cacheable(value = "userOperationalStatus")
-    public List<UserOperationalStatus> getUserOperationalStatusRepo() throws Exception{
-        return userOperationalStatusRepo.findTop10ByOrderByIdDesc();
+    public List<UserOperationalStatus> getUserOperationalStatusRepo(int pageNumber) throws Exception{
+        PageRequest of = PageRequest.of(pageNumber, 10);
+        return userOperationalStatusRepo.findTop10ByOrderByIdDesc(of);
     }
 
 //    @CacheEvict(value = "userOperationalStatus",allEntries = true)

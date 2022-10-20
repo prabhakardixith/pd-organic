@@ -1,7 +1,7 @@
 package com.organic.pdorganic.controller;
 
-import com.organic.pdorganic.entity.User;
 import com.organic.pdorganic.entity.UserOperationalStatus;
+import com.organic.pdorganic.entity.Users;
 import com.organic.pdorganic.rabbitmq_producer.MqConfig;
 import com.organic.pdorganic.service.UserService;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -24,26 +24,26 @@ public class userController
     RabbitTemplate template;
 
     @GetMapping("/user")
-    public List<User> getAllUsers()throws Exception{
+    public List<Users> getAllUsers()throws Exception{
         return userService.getAllUsers();
     }
 
     @GetMapping("/userById")
-    public User getUserById(@RequestParam("id") int id)throws Exception{
+    public Users getUserById(@RequestParam("id") int id)throws Exception{
         template.convertAndSend(MqConfig.EXCHANGE,MqConfig.Routing_Key,new UserOperationalStatus(0,UUID.randomUUID().toString(),""+id,"Requested for specific user by Id",new Date()));
         return userService.getUserById(id);
     }
 
     @PostMapping("/user")
-    public User addUser(@RequestBody User user)throws Exception{
-        User savedUser = userService.saveOrUpdate(user);
+    public Users addUser(@RequestBody Users user)throws Exception{
+        Users savedUser = userService.saveOrUpdate(user);
         template.convertAndSend(MqConfig.EXCHANGE,MqConfig.Routing_Key,new UserOperationalStatus(0,UUID.randomUUID().toString(),user.getEmailId(),"new User created",new Date()));
         return savedUser;
     }
 
     @PutMapping("/user")
-    public User updateUser(@RequestBody User user)throws Exception{
-        User updateUser = userService.saveOrUpdate(user);
+    public Users updateUser(@RequestBody Users user)throws Exception{
+        Users updateUser = userService.saveOrUpdate(user);
         template.convertAndSend(MqConfig.EXCHANGE,MqConfig.Routing_Key,new UserOperationalStatus(0,UUID.randomUUID().toString(),""+user.getUserId(),"User Updated",new Date()));
         return updateUser;
     }
