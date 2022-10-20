@@ -32,7 +32,7 @@ public class RedisUserDao
 
     }
 
-    public List<RedisUser> getAllUsers(RedisUser user) throws Exception{
+    public List<RedisUser> getAllUsers() throws Exception{
         return redisTemplate.opsForHash().values(key);
     }
 }
