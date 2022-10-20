@@ -7,6 +7,7 @@ import com.organic.pdorganic.service.UserOperationalService;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +26,7 @@ public class UserOperationalStatusControl {
     RabbitTemplate template;
 
     @GetMapping("/user/operational")
-    public List<UserOperationalStatus> allUSerOperationalStatus(@RequestParam("pageNo") int pageNumber) throws Exception{
+    public Page<UserOperationalStatus> allUSerOperationalStatus(@RequestParam("pageNo") int pageNumber) throws Exception{
         System.out.println("pageNumber : "+pageNumber);
         return userOperationalService.getUserOperationalStatusRepo(pageNumber);
     }
