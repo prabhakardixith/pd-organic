@@ -22,9 +22,10 @@ public class UserOperationalService
     UserOperationalStatusRepo userOperationalStatusRepo ;
 
 //    @Cacheable(value = "userOperationalStatus")
-    public List<UserOperationalStatus> getUserOperationalStatusRepo(int pageNumber) throws Exception{
+    public Page<UserOperationalStatus> getUserOperationalStatusRepo(int pageNumber) throws Exception{
         PageRequest of = PageRequest.of(pageNumber, 10);
         return userOperationalStatusRepo.findTop10ByOrderByIdDesc(of);
+
     }
 
 //    @CacheEvict(value = "userOperationalStatus",allEntries = true)

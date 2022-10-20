@@ -2,6 +2,7 @@ package com.organic.pdorganic.repo;
 
 
 import com.organic.pdorganic.entity.UserOperationalStatus;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -16,5 +17,5 @@ public interface UserOperationalStatusRepo extends JpaRepository<UserOperational
     ArrayList<UserOperationalStatus> getRecentTenStatusRecords();
 
 
-    List<UserOperationalStatus> findTop10ByOrderByIdDesc(Pageable pageable);
+    Page<UserOperationalStatus> findTop10ByOrderByIdDesc(Pageable pageable);
 }
