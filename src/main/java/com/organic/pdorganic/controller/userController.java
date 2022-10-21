@@ -6,6 +6,7 @@ import com.organic.pdorganic.rabbitmq_producer.MqConfig;
 import com.organic.pdorganic.service.UserService;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -24,8 +25,8 @@ public class userController
     RabbitTemplate template;
 
     @GetMapping("/user")
-    public List<Users> getAllUsers()throws Exception{
-        return userService.getAllUsers();
+    public Page<Users> getAllUsers(@RequestParam("pageNo") int pageNo)throws Exception{
+        return userService.getAllUsers(pageNo);
     }
 
     @GetMapping("/userById")
