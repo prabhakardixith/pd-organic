@@ -11,6 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -27,9 +31,10 @@ public class UserService
     RabbitTemplate template;
 
     @Cacheable(value = "user")
-    public List<Users> getAllUsers()throws Exception{
+    public Page<Users> getAllUsers(int pageNum)throws Exception{
 //        template.convertAndSend(MqConfig.EXCHANGE,MqConfig.Routing_Key,new UserOperationalStatus(0, UUID.randomUUID().toString(),"","Requested for all users",new Date()));
-        return userRepo.findAll();
+       Pageable page = PageRequest.of(pageNum,5, Sort.by("userId").descending());
+        return userRepo.findAll(page);
     }
 
 //    @Cacheable(cacheNames = "user",key = "#user.userId")
