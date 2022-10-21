@@ -1,5 +1,6 @@
 package com.organic.pdorganic.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "users")
 public class Users implements Serializable {
     @Id
@@ -20,9 +22,8 @@ public class Users implements Serializable {
     String userName;
     String emailId;
 
-    Users(int id,String name,String email){
-        this.userId = id;
-        this.userName = name;
-        this.emailId = email;
-    }
+    String phoneNo;
+
+    String address;
+
 }
